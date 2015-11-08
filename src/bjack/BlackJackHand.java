@@ -28,8 +28,9 @@ public class BlackJackHand extends Hand {
             }
             sum = sum + cardVal;
         }
-        if (ace = true && sum  < 10) {
-            sum = sum + 1;
+        if (ace = true && sum + 10 <=21) {
+            sum = sum + 10;
+
         }
             return sum;
         }

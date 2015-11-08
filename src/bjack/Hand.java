@@ -15,6 +15,7 @@ public class Hand {
     }
 
     public void clear() {
+
         hand.clear();
     }
 
