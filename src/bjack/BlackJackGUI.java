@@ -74,12 +74,15 @@ public class BlackJackGUI extends JPanel {
 
         public void actionPerformed(ActionEvent evt) {
             String command = evt.getActionCommand();
-                if (command.equals("HIT"))
+                if (command.equals("HIT")) {
                     doHit();
-                if (command.equals("STAND"))
+                }
+                if (command.equals("STAND")) {
                     doStand();
-                if (command.equals("NEW GAME"));
-                    doNewGame();
+                }
+                if (command.equals("NEW GAME")) {
+                doNewGame();
+            }
         }
 
         public void drawCard(Graphics g, Card card, int x, int y) {
@@ -121,15 +124,22 @@ public class BlackJackGUI extends JPanel {
             g.setFont(bigFont);
             g.drawString(message, 50, 400);
             int cardCt = hand.getCardCount();
-            // int cardCtDealer = dealerHand.getCardCount();
+            int cardCtDealer = dealerHand.getCardCount();
             if (gameInProgress) {
-               // drawCard(g, null, 75 + cardCt * (15+79), 150);
-            for (int i=0;i<cardCt; i++) {
-                drawCard(g, hand.getCard(i), 75+i* (15+79), 200);
-            }
-           // for (int i=0;i<cardCtDealer;i++) {
-                drawCard(g, dealerHand.getCard(0), 75+0 * (15+79), 50);
-                drawCard(g, null, 75+1*(15+79), 50);
+                // drawCard(g, null, 75 + cardCt * (15+79), 150);
+                for (int i = 0; i < cardCt; i++) {
+                    drawCard(g, hand.getCard(i), 75 + i * (15 + 79), 200);
+                }
+                for (int i = 0; i < cardCtDealer; i++) {
+                    if (cardCtDealer <= 2) {
+                        drawCard(g, dealerHand.getCard(0), 75 + 0 * (15 + 79), 50);
+                        drawCard(g, null, 75 + 1 * (15 + 79), 50);
+                    } else {
+                        drawCard(g, dealerHand.getCard(i), 75 + i * (15 + 79), 50);
+                    }
+
+
+                }
             }
         }
 
@@ -153,12 +163,40 @@ public class BlackJackGUI extends JPanel {
         }
 
         void doHit() {
-                hand.addCard(deck.dealCard());
+            hand.addCard(deck.dealCard());
+            message = "Total: " + hand.getBlackJackValue();
+            if (hand.getBlackJackValue() == 21) {
+                message = "You got BLACKJACK!";
+                gameInProgress = false;
+            } if (hand.getBlackJackValue() > 21) {
+            message = "You went over 21!";
+            gameInProgress = false;
+        }
+
+            repaint();
 
         }
 
         void doStand() {
-
+            if (gameInProgress = false) {
+                message = "Press NEW GAME";
+                repaint();
+                return;
+            }
+            message = "You decided to stand! Your final is: " + hand.getBlackJackValue();
+            if (dealerHand.getBlackJackValue() < 16) {
+                dealerHand.addCard(deck.dealCard());
+            } else if (dealerHand.getBlackJackValue() > 21) {
+                message = "You won, dealer went over 21";
+                gameInProgress = false;
+            } else if (dealerHand.getBlackJackValue() >= 16 && dealerHand.getBlackJackValue() > hand.getBlackJackValue()) {
+                message = "You lose!   Dealer: " + dealerHand.getBlackJackValue() + "   You: " + hand.getBlackJackValue();
+                gameInProgress = false;
+            } else  {
+                message = "You win!     Dealer:" + dealerHand.getBlackJackValue() + "   You: " + hand.getBlackJackValue();
+                gameInProgress = false;
+            }
+        repaint();
         }
 
     }

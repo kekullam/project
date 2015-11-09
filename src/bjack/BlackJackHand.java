@@ -13,8 +13,7 @@ public class BlackJackHand extends Hand {
         int cards = getCardCount();
 
         for (int i = 0; i < cards; i++) {
-            Card card;
-            card = getCard(i);
+            Card card = getCard(i);
             int cardVal = card.getValue();
             if (cardVal > 10) {
                 cardVal = 10;
@@ -24,7 +23,7 @@ public class BlackJackHand extends Hand {
             }
             sum = sum + cardVal;
         }
-            if (aces = true && sum + 10 <= 21) {
+            if (aces == true && sum + 10 <= 21) {
                 sum = sum +10;
             }
         return sum;
