@@ -17,6 +17,7 @@ public class Card {
     private final int suit;
     private final int value;
 
+    // Annab kaardile olukorrale vastavad väärtused
     public Card(int suit, int value) {
         this.suit = suit;
         this.value = value;

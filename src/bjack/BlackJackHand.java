@@ -5,7 +5,7 @@ package bjack;
  */
 public class BlackJackHand extends Hand {
 
-
+    // Tagastab kaardi v‰‰rtused vastavalt blackjacki reeglitele
     public int getBlackJackValue() {
 
         int sum = 0;

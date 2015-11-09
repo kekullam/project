@@ -11,6 +11,7 @@ public class Hand {
 
 
     public Hand() {
+
         hand = new ArrayList<Card>();
     }
 

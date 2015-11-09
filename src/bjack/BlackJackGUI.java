@@ -121,14 +121,15 @@ public class BlackJackGUI extends JPanel {
             g.setFont(bigFont);
             g.drawString(message, 50, 400);
             int cardCt = hand.getCardCount();
-            int cardCtDealer = dealerHand.getCardCount();
-            if (gameInProgress)
+            // int cardCtDealer = dealerHand.getCardCount();
+            if (gameInProgress) {
                // drawCard(g, null, 75 + cardCt * (15+79), 150);
             for (int i=0;i<cardCt; i++) {
                 drawCard(g, hand.getCard(i), 75+i* (15+79), 200);
             }
-            for (int i=0;i<cardCtDealer;i++) {
-                drawCard(g, dealerHand.getCard(i), 75+i * (15+79), 50);
+           // for (int i=0;i<cardCtDealer;i++) {
+                drawCard(g, dealerHand.getCard(0), 75+0 * (15+79), 50);
+                drawCard(g, null, 75+1*(15+79), 50);
             }
         }
 
@@ -152,6 +153,8 @@ public class BlackJackGUI extends JPanel {
         }
 
         void doHit() {
+                hand.addCard(deck.dealCard());
+
         }
 
         void doStand() {
