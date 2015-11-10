@@ -55,6 +55,8 @@ public class BlackJackGUI extends JPanel {
         BlackJackHand hand;
         BlackJackHand dealerHand;
         String message;
+        String message2;
+
 
         boolean gameInProgress;
 
@@ -123,6 +125,7 @@ public class BlackJackGUI extends JPanel {
             }
             g.setFont(bigFont);
             g.drawString(message, 50, 400);
+            g.drawString(message2, 50, 380);
             int cardCt = hand.getCardCount();
             int cardCtDealer = dealerHand.getCardCount();
             if (gameInProgress) {
@@ -144,20 +147,26 @@ public class BlackJackGUI extends JPanel {
         }
 
         void doNewGame() {
-            if (gameInProgress) {
-                message = "You still have to finish your game!";
-                repaint();
-                return;
-            }
+            //if (gameInProgress) {
+            //    message = "You still have to finish your game!";
+              //  repaint();
+               // return;
+            //}
+            int playerMoney = 100;
             deck = new Deck();
             hand = new BlackJackHand();
             dealerHand = new BlackJackHand();
             deck.shuffle();
             hand.addCard(deck.dealCard());
             hand.addCard(deck.dealCard());
+            if (hand.getBlackJackValue() == 21) {
+                message = "Lucky you! You have blackjack already!";
+            } else {
+                message = "Total: " + hand.getBlackJackValue();
+            }
             dealerHand.addCard(deck.dealCard());
-            dealerHand.addCard(deck.dealCard());
-            message = "Total: " + hand.getBlackJackValue();
+                //dealerHand.addCard(deck.dealCard());
+            message2 = "Money: " + playerMoney;
             gameInProgress = true;
             repaint();
         }
@@ -167,36 +176,38 @@ public class BlackJackGUI extends JPanel {
             message = "Total: " + hand.getBlackJackValue();
             if (hand.getBlackJackValue() == 21) {
                 message = "You got BLACKJACK!";
-                gameInProgress = false;
-            } if (hand.getBlackJackValue() > 21) {
-            message = "You went over 21!";
-            gameInProgress = false;
-        }
 
+                // gameInProgress = false;
+            } if (hand.getBlackJackValue() > 21) {
+                message = "You went over 21!";
+                // gameInProgress = false;
+
+            }
             repaint();
+
+
 
         }
 
         void doStand() {
-            if (gameInProgress = false) {
-                message = "Press NEW GAME";
-                repaint();
-                return;
-            }
-            message = "You decided to stand! Your final is: " + hand.getBlackJackValue();
+
+            // message = "You decided to stand! Your final is: " + hand.getBlackJackValue();
             if (dealerHand.getBlackJackValue() < 16) {
                 dealerHand.addCard(deck.dealCard());
+                dealerHand.addCard(deck.dealCard());
+            } else if (dealerHand.getBlackJackValue() == 21) {
+                message = "You lost, dealer got a BLACKJACK!";
             } else if (dealerHand.getBlackJackValue() > 21) {
                 message = "You won, dealer went over 21";
-                gameInProgress = false;
+                //gameInProgress = false;
             } else if (dealerHand.getBlackJackValue() >= 16 && dealerHand.getBlackJackValue() > hand.getBlackJackValue()) {
                 message = "You lose!   Dealer: " + dealerHand.getBlackJackValue() + "   You: " + hand.getBlackJackValue();
-                gameInProgress = false;
+                //gameInProgress = false;
             } else  {
                 message = "You win!     Dealer:" + dealerHand.getBlackJackValue() + "   You: " + hand.getBlackJackValue();
-                gameInProgress = false;
+                //gameInProgress = false;
             }
-        repaint();
+            repaint();
         }
 
     }
