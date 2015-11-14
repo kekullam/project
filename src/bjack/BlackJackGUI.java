@@ -1,7 +1,6 @@
 package bjack;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,10 +37,10 @@ public class BlackJackGUI extends JPanel {
         buttonPanel.setBackground(new Color(0, 120, 0));
         add(buttonPanel, BorderLayout.SOUTH);
 
-        JTextField bet = new JTextField( 5);
-        //bet.addActionListener(board);
+        JTextField bet = new JTextField(5);
+        bet.addActionListener(board);
         buttonPanel.add(bet);
-        //bet.getText();
+
 
         JButton hit = new JButton("HIT");
         hit.addActionListener(board);
@@ -70,8 +69,7 @@ public class BlackJackGUI extends JPanel {
         String message2; // Money
         String message3; // bet
         int playerMoney;
-        int playerBet;
-
+        String playerBet;
 
         boolean gameInProgress;
 
@@ -103,8 +101,6 @@ public class BlackJackGUI extends JPanel {
                 if (command.equals("DEAL")) {
                     doDeal();
                 }
-
-
         }
 
 
@@ -152,19 +148,16 @@ public class BlackJackGUI extends JPanel {
             int cardCt = hand.getCardCount();
             int cardCtDealer = dealerHand.getCardCount();
             if (gameInProgress) {
-                // drawCard(g, null, 75 + cardCt * (15+79), 150);
                 for (int i = 0; i < cardCt; i++) {
                     drawCard(g, hand.getCard(i), 75 + i * (15 + 79), 200);
                 }
                 for (int i = 0; i < cardCtDealer; i++) {
-                    if (cardCtDealer <= 2) {
+                    if (cardCtDealer < 2) {
                         drawCard(g, dealerHand.getCard(0), 75 + 0 * (15 + 79), 50);
                         drawCard(g, null, 75 + 1 * (15 + 79), 50);
                     } else {
                         drawCard(g, dealerHand.getCard(i), 75 + i * (15 + 79), 50);
                     }
-
-
                 }
             } else {
                 drawCard(g, null, 75 + 0 * (15 + 79), 50);
@@ -198,33 +191,24 @@ public class BlackJackGUI extends JPanel {
             } if (hand.getBlackJackValue() > 21) {
                 message = "You went over 21!";
                 // gameInProgress = false;
-
-
             }
             repaint();
-
-
-
 
         }
 
         void doStand() {
 
-            // message = "You decided to stand! Your final is: " + hand.getBlackJackValue();
-            if (dealerHand.getBlackJackValue() < 16) {
+            dealerHand.addCard(deck.dealCard());
+            if (dealerHand.getBlackJackValue() == 21) {
+            message = "You lost, dealer got a BLACKJACK!";
+            } if (dealerHand.getBlackJackValue() < 16) {
                 dealerHand.addCard(deck.dealCard());
-                dealerHand.addCard(deck.dealCard());
-            } else if (dealerHand.getBlackJackValue() == 21) {
-                message = "You lost, dealer got a BLACKJACK!";
-            } else if (dealerHand.getBlackJackValue() > 21) {
+            } if (dealerHand.getBlackJackValue() > 21) {
                 message = "You won, dealer went over 21";
-                //gameInProgress = false;
-            } else if (dealerHand.getBlackJackValue() >= 16 && dealerHand.getBlackJackValue() > hand.getBlackJackValue()) {
+            } else if (dealerHand.getBlackJackValue() >= 16 && dealerHand.getBlackJackValue() > hand.getBlackJackValue()){
                 message = "You lose!   Dealer: " + dealerHand.getBlackJackValue() + "   You: " + hand.getBlackJackValue();
-                //gameInProgress = false;
-            } else  {
+            } else {
                 message = "You win!     Dealer:" + dealerHand.getBlackJackValue() + "   You: " + hand.getBlackJackValue();
-                //gameInProgress = false;
             }
             repaint();
         }
@@ -242,7 +226,6 @@ public class BlackJackGUI extends JPanel {
                 message = "Total: " + hand.getBlackJackValue();
             }
             dealerHand.addCard(deck.dealCard());
-            //dealerHand.addCard(deck.dealCard());
             message2 = "Money: " + playerMoney;
             gameInProgress = true;
             repaint();
