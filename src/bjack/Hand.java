@@ -15,18 +15,9 @@ public class Hand {
         hand = new ArrayList<Card>();
     }
 
-    public void clear() {
-
-        hand.clear();
-    }
-
     public void addCard(Card a) {
         hand.add(a);
-    }
-
-    public void removeCard(int pos) {
-        hand.remove(pos);
-    }
+      }
 
     public int getCardCount() {
         return hand.size();

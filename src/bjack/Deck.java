@@ -29,10 +29,6 @@ public class Deck {
         }
         cardsUsed = 0;
     }
-    // Tagastab pakis olevate kaartide arvu
-    public int cardsLeft() {
-        return deck.length - cardsUsed;
-    }
 
     public Card dealCard() {
         cardsUsed++;
