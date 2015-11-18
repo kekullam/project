@@ -17,7 +17,7 @@ public class BlackJackGUI extends JPanel {
         JFrame window = new JFrame("Blackjack");
         BlackJackGUI content = new BlackJackGUI();
         window.setContentPane(content);
-        window.setSize(700, 500);
+        window.setSize(700, 550);
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,9 +42,8 @@ public class BlackJackGUI extends JPanel {
         slider.setMajorTickSpacing(50);
         slider.setMinorTickSpacing(10);
         slider.setPaintLabels(true);
+        slider.setValue(0);
         slider.addChangeListener(board);
-
-
         buttonPanel.add(slider);
 
 
@@ -63,7 +62,6 @@ public class BlackJackGUI extends JPanel {
         JButton newGame = new JButton("NEW GAME");
         newGame.addActionListener(board);
         board.add(newGame);
-
     }
 
     private class CardPanel extends JPanel implements ActionListener, ChangeListener {
@@ -75,7 +73,6 @@ public class BlackJackGUI extends JPanel {
         String message2; // Money
         int playerBet;
         int playerMoney;
-
 
         boolean gameInProgress;
         boolean gameStopped;
@@ -100,7 +97,6 @@ public class BlackJackGUI extends JPanel {
             }
         }
 
-
         public void actionPerformed(ActionEvent evt) {
             String command = evt.getActionCommand();
                 if (command.equals("HIT") && !gameStopped) {
@@ -112,7 +108,7 @@ public class BlackJackGUI extends JPanel {
                 if (command.equals("NEW GAME")) {
                     doNewGame();
                 }
-                if (command.equals("DEAL")) {
+                if (command.equals("DEAL") && playerBet != 0 && playerBet <= playerMoney) {
                     doDeal();
                 }
         }
@@ -174,8 +170,6 @@ public class BlackJackGUI extends JPanel {
                 drawCard(g, null, 75, 200);
                 drawCard(g, null, 75 +(15 + 79), 200);
             }
-
-
         }
 
         void doNewGame() {
@@ -208,14 +202,20 @@ public class BlackJackGUI extends JPanel {
             dealerHand.addCard(deck.dealCard());
             if (dealerHand.getBlackJackValue() == 21) {
             message = "You lost, dealer got a BLACKJACK";
+                message2 = "Money: " + playerMoney;
             } if (dealerHand.getBlackJackValue() < 16) {
                 dealerHand.addCard(deck.dealCard());
             } if (dealerHand.getBlackJackValue() > 21) {
                 message = "You won, dealer went over 21";
+                playerMoney += playerBet*2;
+                message2 = "Money: " + playerMoney;
             } else if (dealerHand.getBlackJackValue() >= 16 && dealerHand.getBlackJackValue() > hand.getBlackJackValue()){
                 message = "You lose!       You: " + hand.getBlackJackValue() + "    Dealer: " + dealerHand.getBlackJackValue();
+                message2 = "Money: " + playerMoney;
             } else {
                 message = "You win!        You: " + hand.getBlackJackValue() + "    Dealer: " + dealerHand.getBlackJackValue();
+                playerMoney += playerBet*2;
+                message2 = "Money: " + playerMoney;
             }
             gameStopped = true;
             repaint();
@@ -234,14 +234,12 @@ public class BlackJackGUI extends JPanel {
                 message = "Total: " + hand.getBlackJackValue();
             }
             dealerHand.addCard(deck.dealCard());
-            message2 = "Money: " + (playerMoney - playerBet);
+            playerMoney -= playerBet;
+            message2 = "Money: " + playerMoney ;
             gameInProgress = true;
             gameStopped = false;
             repaint();
         }
-
-
     }
-
 }
 
