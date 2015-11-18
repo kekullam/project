@@ -36,11 +36,13 @@ public class BlackJackGUI extends JPanel {
         buttonPanel.setBackground(new Color(0, 102, 0));
         add(buttonPanel, BorderLayout.SOUTH);
 
+
         JSlider slider = new JSlider();
         slider.setBackground(new Color(0, 102, 0));
         slider.setPaintTicks(true);
-        slider.setMajorTickSpacing(50);
-        slider.setMinorTickSpacing(10);
+        slider.setMajorTickSpacing(25);
+        slider.setMinorTickSpacing(5);
+        slider.setForeground(Color.WHITE);
         slider.setPaintLabels(true);
         slider.setValue(0);
         slider.addChangeListener(board);
@@ -95,6 +97,7 @@ public class BlackJackGUI extends JPanel {
             if (!source.getValueIsAdjusting()) {
                  playerBet = source.getValue();
             }
+
         }
 
         public void actionPerformed(ActionEvent evt) {
@@ -203,7 +206,7 @@ public class BlackJackGUI extends JPanel {
             if (dealerHand.getBlackJackValue() == 21) {
             message = "You lost, dealer got a BLACKJACK";
                 message2 = "Money: " + playerMoney;
-            } if (dealerHand.getBlackJackValue() < 16) {
+            } while (dealerHand.getBlackJackValue() < 16) {
                 dealerHand.addCard(deck.dealCard());
             } if (dealerHand.getBlackJackValue() > 21) {
                 message = "You won, dealer went over 21";
