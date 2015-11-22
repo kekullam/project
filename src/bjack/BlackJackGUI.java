@@ -13,11 +13,12 @@ import java.net.URL;
  */
 public class BlackJackGUI extends JPanel {
 
+
     public static void main (String[] args) {
         JFrame window = new JFrame("Blackjack");
         BlackJackGUI content = new BlackJackGUI();
         window.setContentPane(content);
-        window.setSize(700, 550);
+        window.setSize(700, 500);
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,7 +27,7 @@ public class BlackJackGUI extends JPanel {
 
     public BlackJackGUI() {
 
-        setLayout(new BorderLayout(0, 0));
+        setLayout(new BorderLayout());
 
         CardPanel board = new CardPanel();
         board.setBackground(new Color(0, 102, 0));
@@ -36,6 +37,10 @@ public class BlackJackGUI extends JPanel {
         buttonPanel.setBackground(new Color(0, 102, 0));
         add(buttonPanel, BorderLayout.SOUTH);
 
+        JLabel text = new JLabel();
+        text.setForeground(Color.WHITE);
+        text.setText("BET: ");
+        buttonPanel.add(text);
 
         JSlider slider = new JSlider();
         slider.setBackground(new Color(0, 102, 0));
@@ -88,7 +93,6 @@ public class BlackJackGUI extends JPanel {
             setBackground(new Color(0, 102, 0));
             setForeground(Color.WHITE);
             customFont = new Font("Serif", Font.PLAIN, 20);
-            setPreferredSize(new Dimension(15 + 4 * (15 + 79), 185));
             doNewGame();
         }
 
@@ -97,7 +101,6 @@ public class BlackJackGUI extends JPanel {
             if (!source.getValueIsAdjusting()) {
                  playerBet = source.getValue();
             }
-
         }
 
         public void actionPerformed(ActionEvent evt) {
@@ -201,20 +204,21 @@ public class BlackJackGUI extends JPanel {
         }
 
         void doStand() {
-
             dealerHand.addCard(deck.dealCard());
             if (dealerHand.getBlackJackValue() == 21) {
             message = "You lost, dealer got a BLACKJACK";
-                message2 = "Money: " + playerMoney;
             } while (dealerHand.getBlackJackValue() < 16) {
                 dealerHand.addCard(deck.dealCard());
             } if (dealerHand.getBlackJackValue() > 21) {
                 message = "You won, dealer went over 21";
-                playerMoney += playerBet*2;
+                playerMoney += playerBet * 2;
                 message2 = "Money: " + playerMoney;
+            } else if (dealerHand.getBlackJackValue() == hand.getBlackJackValue()) {
+                playerMoney += playerBet;
+                message2 = "Money: " + playerMoney;
+                message = "Tie, you both have " + dealerHand.getBlackJackValue();
             } else if (dealerHand.getBlackJackValue() >= 16 && dealerHand.getBlackJackValue() > hand.getBlackJackValue()){
                 message = "You lose!       You: " + hand.getBlackJackValue() + "    Dealer: " + dealerHand.getBlackJackValue();
-                message2 = "Money: " + playerMoney;
             } else {
                 message = "You win!        You: " + hand.getBlackJackValue() + "    Dealer: " + dealerHand.getBlackJackValue();
                 playerMoney += playerBet*2;
@@ -225,6 +229,7 @@ public class BlackJackGUI extends JPanel {
         }
 
         public void doDeal() {
+            gameInProgress = true;
             deck = new Deck();
             hand = new BlackJackHand();
             dealerHand = new BlackJackHand();
@@ -233,13 +238,14 @@ public class BlackJackGUI extends JPanel {
             hand.addCard(deck.dealCard());
             if (hand.getBlackJackValue() == 21) {
                 message = "Lucky you! You have blackjack already";
+                playerMoney += playerBet*2;
+                message2 = "Money: " + playerMoney;
             } else {
                 message = "Total: " + hand.getBlackJackValue();
             }
             dealerHand.addCard(deck.dealCard());
             playerMoney -= playerBet;
             message2 = "Money: " + playerMoney ;
-            gameInProgress = true;
             gameStopped = false;
             repaint();
         }
