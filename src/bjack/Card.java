@@ -3,6 +3,10 @@ package bjack;
 /**
  * Created by Kerdo Kullam‰e on 5.11.2015.
  */
+
+/**
+ * Kaardi objekt, millel on neli erinevat masti ja neli erilist v‰‰rtust.
+ */
 public class Card {
     public static final int SPADES = 0;
     public static final int CLUBS = 1;
@@ -17,18 +21,28 @@ public class Card {
     private final int suit;
     private final int value;
 
-    // Annab kaardile olukorrale vastavad v‰‰rtused
+    /**
+     * Konstruktor, mis moodustab kaardi antud masti ja v‰‰rtusega.
+     * @param suit uue kaardi mast.
+     * @param value uue kaardi v‰‰rtus.
+     */
     public Card(int suit, int value) {
         this.suit = suit;
         this.value = value;
     }
 
-    // Tagastab kaardi masti
+    /**
+     * Meetod, mis tagastab kaardi masti.
+     * @return mast(SPADES, HEARTS, CLUBS or DIAMONDS).
+     */
     public int getSuit() {
         return suit;
     }
 
-    // Tagastab kaardi v‰‰rtuse
+    /**
+     * Meetod, mis tagastab kaardi v‰‰rtuse.
+     * @return v‰‰rtus(1-13).
+     */
     public int getValue() {
         return value;
     }
