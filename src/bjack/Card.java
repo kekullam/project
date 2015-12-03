@@ -5,7 +5,7 @@ package bjack;
  */
 
 /**
- * Kaardi objekt, millel on neli erinevat masti ja neli erilist väärtust.
+ * Kaardi klass, millesse kuuluvad neli erinevat masti ja nelja mitte numbrilise kaardi väärtust.
  */
 public class Card {
     public static final int SPADES = 0;

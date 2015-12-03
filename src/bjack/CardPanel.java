@@ -76,12 +76,12 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
     }
 
     /**
-     * Joonistab 79x123 pixli ristküliku suuruse kaardi. Kaardi joonistamine
+     * Joonistab 79x123 pixli suuruse ristküliku kujulise kaardi. Kaardi joonistamine
      * vajab pildi faili "cards.png".
      * @param g
      * @param card Kaart mis joonistatakse, kui kaardi väärtus on null, siis joonistatakse seljaga
      * olev kaart
-     * @param x kaardi vasaku ülemise nurka x-koordinaat.
+     * @param x kaardi vasaku ülemise nurga x-koordinaat.
      * @param y kaardi vasaku ülemise nurga y-koordinaat.
      */
     public void drawCard(Graphics g, Card card, int x, int y) {

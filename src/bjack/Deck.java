@@ -4,8 +4,10 @@ package bjack;
  * Created by Kerdo Kullamäe on 5.11.2015.
  */
 
+import java.util.Random;
+
 /**
- * Kaardipaki objekt, tavaline 52 kaardiga pakk.
+ * Kaardipaki klass, tavaline 52 kaardiga pakk.
  */
 public class Deck {
     /**
@@ -35,14 +37,16 @@ public class Deck {
     }
 
     /**
-     * Meetod, mis paneb kõik kaardid kaardipakki ning segab kaardipaki ära.
+     * Meetod, mis segab kaardipaki ära.
      */
     public void shuffle() {
-        for ( int i = deck.length-1; i > 0; i-- ) {
-            int rand = (int)(Math.random()*(i+1));
-            Card atm = deck[i];
+        Random randomGene = new Random();
+
+        for (int i = 0; i<deck.length;i++) {
+            int rand = randomGene.nextInt(deck.length);
+            Card temp = deck[i];
             deck[i] = deck[rand];
-            deck[rand] = atm;
+            deck[rand] = temp;
         }
         cardsUsed = 0;
     }

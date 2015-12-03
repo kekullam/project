@@ -4,10 +4,7 @@ package bjack;
  * Created by Kerdo Kullam‰e on 6.11.2015.
  */
 
-/**
- * Hand klassi alamklass.
- */
-public class BlackJackHand extends Hand {
+public class    BlackJackHand extends Hand {
 
     /**
      * Meetod, mis tagastab kaartide v‰‰rtuse vastavalt blackjacki
@@ -18,9 +15,9 @@ public class BlackJackHand extends Hand {
 
         int sum = 0;
         boolean aces = false;
-        int cards = getCardCount();
+        int cardsInHand = getCardCount();
 
-        for (int i = 0; i < cards; i++) {
+        for (int i = 0; i < cardsInHand; i++) {
             Card card = getCard(i);
             int cardVal = card.getValue();
             if (cardVal > 10) {
@@ -31,7 +28,7 @@ public class BlackJackHand extends Hand {
             }
             sum += cardVal;
         }
-            if (aces == true && sum + 10 <= 21) {
+            if (aces && sum + 10 <= 21) {
                 sum += 10;
             }
         return sum;

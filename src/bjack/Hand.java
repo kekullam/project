@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 /**
- * Käe objekt, mis kujutab endast käes olevaid kaarte. Kaardid kuuluvad Cards klassi.
+ * Käe klass, mis kujutab endast käes olevaid kaarte.
  */
 public class Hand {
 
