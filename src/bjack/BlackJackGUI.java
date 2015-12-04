@@ -7,6 +7,11 @@ import java.awt.*;
 /**
  * Created by Kerdo Kullamäe on 6.11.2015.
  */
+
+/**
+ * Klass, mis põhimõtteliselt paneb kõik otsad kokku ja võimaldab
+ * avada mängu.
+ */
 public class BlackJackGUI extends JPanel {
 
     /**
@@ -24,7 +29,7 @@ public class BlackJackGUI extends JPanel {
     }
 
     /**
-     * Konstruktor, mis moodustab akna kuva. Keskmise osa moodustab CardPanel(JPaneli alamklass),
+     * Konstruktor, mis moodustab akna kuva. Keskmise osa moodustab CardPanel,
      * alumise osa moodustab buttonPanel, kus on nupud ja slider.
      */
     public BlackJackGUI() {
