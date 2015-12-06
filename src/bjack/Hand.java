@@ -9,6 +9,8 @@ import java.util.ArrayList;
 /**
  * Käe klass, mis kujutab endast käes olevaid kaarte.
  */
+
+// http://math.hws.edu/javanotes/source/chapter5/Hand.java
 public class Hand {
 
     private ArrayList<Card> hand;

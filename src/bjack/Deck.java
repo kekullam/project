@@ -9,6 +9,8 @@ import java.util.Random;
 /**
  * Kaardipaki klass, tavaline 52 kaardiga pakk.
  */
+
+// http://math.hws.edu/javanotes/source/chapter5/Deck.java
 public class Deck {
     /**
      * Kaartide massiiv.

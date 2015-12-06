@@ -21,6 +21,7 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
     Deck deck;
     BlackJackHand hand;
     BlackJackHand dealerHand;
+
     String message;  // Text
     String message2; // Money
 
@@ -60,17 +61,16 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
      * Kutsub välja meetodi vastavalt mängija vajutatud nupule.
      */
     public void actionPerformed(ActionEvent evt) {
-        String command = evt.getActionCommand();
-        if (command.equals("HIT") && !gameStopped) {
+        if (evt.getActionCommand().equals("HIT") && !gameStopped) {
             doHit();
         }
-        if (command.equals("STAND") && !gameStopped) {
+        if (evt.getActionCommand().equals("STAND") && !gameStopped) {
             doStand();
         }
-        if (command.equals("NEW GAME")) {
+        if (evt.getActionCommand().equals("NEW GAME")) {
             doNewGame();
         }
-        if (command.equals("DEAL") && gameStopped && dealActive && playerBet != 0 && playerBet <= playerMoney) {
+        if (evt.getActionCommand().equals("DEAL") && gameStopped && dealActive && playerBet != 0 && playerBet <= playerMoney) {
             doDeal();
         }
     }
@@ -84,6 +84,7 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
      * @param x kaardi vasaku ülemise nurga x-koordinaat.
      * @param y kaardi vasaku ülemise nurga y-koordinaat.
      */
+    // http://math.hws.edu/eck/cs124/javanotes5/source/HighLowWithImages.java
     public void drawCard(Graphics g, Card card, int x, int y) {
         int cx;
         int cy;
@@ -109,6 +110,7 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
     /**
      * Laeb pildi failist "cards.png"
      */
+    // http://math.hws.edu/eck/cs124/javanotes5/source/HighLowWithImages.java
     private void loadImage() {
         ClassLoader c1 = getClass().getClassLoader();
         URL imageURL = c1.getResource("cards.png");
@@ -153,7 +155,7 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
      * Alustab uut mängu kui on välja kutsutud.
      */
     void doNewGame() {
-        playerMoney = 100;
+        playerMoney = 500;
         deck = new Deck();
         hand = new BlackJackHand();
         dealerHand = new BlackJackHand();

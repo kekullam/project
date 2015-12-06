@@ -40,14 +40,14 @@ public class BlackJackGUI extends JPanel {
         board.setBackground(new Color(0, 102, 0));
         add(board, BorderLayout.CENTER);
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(0, 102, 0));
-        add(buttonPanel, BorderLayout.SOUTH);
+        JPanel buttons = new JPanel();
+        buttons.setBackground(new Color(0, 102, 0));
+        add(buttons, BorderLayout.SOUTH);
 
         JLabel text = new JLabel();
         text.setForeground(Color.WHITE);
         text.setText("BET: ");
-        buttonPanel.add(text);
+        buttons.add(text);
 
         JSlider slider = new JSlider();
         slider.setBackground(new Color(0, 102, 0));
@@ -58,19 +58,19 @@ public class BlackJackGUI extends JPanel {
         slider.setPaintLabels(true);
         slider.setValue(0);
         slider.addChangeListener(board);
-        buttonPanel.add(slider);
+        buttons.add(slider);
 
         JButton hit = new JButton("HIT");
         hit.addActionListener(board);
-        buttonPanel.add(hit);
+        buttons.add(hit);
 
         JButton stand = new JButton("STAND");
         stand.addActionListener(board);
-        buttonPanel.add(stand);
+        buttons.add(stand);
 
         JButton deal = new JButton("DEAL");
         deal.addActionListener(board);
-        buttonPanel.add(deal);
+        buttons.add(deal);
 
         JButton newGame = new JButton("NEW GAME");
         newGame.addActionListener(board);

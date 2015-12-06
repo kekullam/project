@@ -7,6 +7,8 @@ package bjack;
 /**
  * Kaardi klass, millesse kuuluvad neli erinevat masti ja nelja mitte numbrilise kaardi v‰‰rtust.
  */
+
+//http://math.hws.edu/javanotes/source/chapter5/Card.java
 public class Card {
     public static final int SPADES = 0;
     public static final int CLUBS = 1;
