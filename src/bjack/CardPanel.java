@@ -12,7 +12,6 @@ import java.net.URL;
  * Created by Kerdo Kullamäe on 28.11.2015.
  */
 
-
 /**
  * Klass, mis kuvab kaardid ja käitub vastavalt mängija valikutele
  */
@@ -33,7 +32,6 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
     boolean dealActive;
 
     Font customFont;
-
     Image cardImages;
 
     /**
@@ -61,14 +59,17 @@ public class CardPanel extends JPanel implements ActionListener, ChangeListener 
      * Kutsub välja meetodi vastavalt mängija vajutatud nupule.
      */
     public void actionPerformed(ActionEvent evt) {
+        if (evt.getActionCommand().equals("New game")) {
+            doNewGame();
+        }
+        if (evt.getActionCommand().equals("Exit")) {
+            System.exit(0);
+        }
         if (evt.getActionCommand().equals("HIT") && !gameStopped) {
             doHit();
         }
         if (evt.getActionCommand().equals("STAND") && !gameStopped) {
             doStand();
-        }
-        if (evt.getActionCommand().equals("NEW GAME")) {
-            doNewGame();
         }
         if (evt.getActionCommand().equals("DEAL") && gameStopped && dealActive && playerBet != 0 && playerBet <= playerMoney) {
             doDeal();

@@ -14,14 +14,17 @@ import java.awt.*;
  */
 public class BlackJackGUI extends JPanel {
 
+    static CardPanel board = new CardPanel();
+
     /**
      * Avab akna, mis kuvab BlackJackGUI sisu.
      */
     public static void main(String[] args) {
         JFrame window = new JFrame("Blackjack");
+        window.setJMenuBar(getMenuBar());
         BlackJackGUI content = new BlackJackGUI();
         window.setContentPane(content);
-        window.setSize(700, 500);
+        window.setSize(700, 520);
         window.setResizable(true);
         window.setLocationRelativeTo(null);
         window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
@@ -34,15 +37,14 @@ public class BlackJackGUI extends JPanel {
      */
     public BlackJackGUI() {
 
-        setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout());
 
-        CardPanel board = new CardPanel();
         board.setBackground(new Color(0, 102, 0));
-        add(board, BorderLayout.CENTER);
+        this.add(board, BorderLayout.CENTER);
 
         JPanel buttons = new JPanel();
         buttons.setBackground(new Color(0, 102, 0));
-        add(buttons, BorderLayout.SOUTH);
+        this.add(buttons, BorderLayout.SOUTH);
 
         JLabel text = new JLabel();
         text.setForeground(Color.WHITE);
@@ -71,9 +73,18 @@ public class BlackJackGUI extends JPanel {
         JButton deal = new JButton("DEAL");
         deal.addActionListener(board);
         buttons.add(deal);
+    }
 
-        JButton newGame = new JButton("NEW GAME");
-        newGame.addActionListener(board);
-        board.add(newGame);
+    public static JMenuBar getMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Menu");
+        menuBar.add(menu);
+        JMenuItem item = new JMenuItem("New game");
+        JMenuItem item2 = new JMenuItem("Exit");
+        item.addActionListener(board);
+        item2.addActionListener(board);
+        menu.add(item);
+        menu.add(item2);
+        return menuBar;
     }
 }
