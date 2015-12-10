@@ -38,7 +38,7 @@ public class BlackJackHand extends Hand {
                 aces = true;
             }
         }
-        if (aces == true && sum < 12) {
+        if (aces && sum < 12) {
             sum += 10;
         }
         return sum;
